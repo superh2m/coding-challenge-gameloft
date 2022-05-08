@@ -1,0 +1,29 @@
+{
+  "name": "coding-challenge-gameloft",
+  "version": "1.0.0",
+  "description": "coding challenge by Gameloft accepted by Hama MOHAMED MAHMOUD",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --watch src -e ts --exec npm run dev:start",
+    "dev:start": "npm-run-all build start",
+    "start": "node .",
+    "build": "tsc",
+    "test": "./node_modules/mocha/bin/mocha ./dist/test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superh2m/coding-challenge-gameloft.git"
+  },
+  "author": "Hama MOHAMED MAHMOUD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/superh2m/coding-challenge-gameloft/issues"
+  },
+  "homepage": "https://github.com/superh2m/coding-challenge-gameloft#readme",
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.16",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.6.4"
+  }
+}
