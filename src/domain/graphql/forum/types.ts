@@ -5,5 +5,6 @@ export const types = gql `
     id: ID!
     name: String!
     isPrivate: Boolean!
+    forumUsers: [ForumUser]
   }
 `;

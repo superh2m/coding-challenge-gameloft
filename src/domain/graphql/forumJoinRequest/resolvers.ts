@@ -43,7 +43,9 @@ const mutations = {
 
   acceptJoinRequest: async (_root: undefined, args: Record<string, string>): Promise<IForumJoinRequestDocument> => {
     // no user permission check here, in order to facilitate testing this action
-    const forumJoinRequest: HydratedDocument<IForumJoinRequestDocument> = await ForumJoinRequestDocument.findById(args.forumJoinRequestId);
+    const forumJoinRequest: HydratedDocument<IForumJoinRequestDocument> = await ForumJoinRequestDocument.findById(args.forumJoinRequestId).populate('forum');
+
+    const forum: HydratedDocument<IForumDocument> = await ForumDocument.findById(forumJoinRequest.forum.id);
 
     forumJoinRequest.isAccepted = true;
 
@@ -52,12 +54,16 @@ const mutations = {
     const forumUser: HydratedDocument<IForumUserDocument> = new ForumUserDocument({
       role: Role.PARTICIPANT,
       user: forumJoinRequest.user,
-      forum: forumJoinRequest.forum
+      forum: forum
     });
 
     await forumUser.save();
 
-    return (await forumJoinRequest.populate('forum')).populate('user');
+    forum.forumUsers.push(forumUser);
+
+    await forum.save();
+
+    return await forumJoinRequest.populate('user');
   },
 
   declineJoinRequest: async (_root: undefined, args: Record<string, string>): Promise<IForumJoinRequestDocument> => {

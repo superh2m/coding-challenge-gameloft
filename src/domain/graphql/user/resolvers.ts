@@ -3,13 +3,13 @@ import { Authenticator } from '../../../app/dev/authenticator';
 import { IUser as IUserDocument, User as UserDocument } from '../../document/user';
 
 const queries = {
-  user: async (root: undefined, args: Record<string, string>): Promise<IUserDocument> => {
+  user: async (_root: undefined, args: Record<string, string>): Promise<IUserDocument> => {
     return await UserDocument.findById(args.id).exec();
   }
 };
   
 const mutations = {
-  updateProfile: async (root: undefined, args: Record<string, string>): Promise<IUserDocument> => {
+  updateProfile: async (_root: undefined, args: Record<string, string>): Promise<IUserDocument> => {
     const currentUser: HydratedDocument<IUserDocument> = await Authenticator.getDefaultUser();
 
     currentUser.firstName = args.firstName;
