@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import { Forum, IForum } from './forum';
-import { IUser, User } from './user';
+import { IForum } from './forum';
+import { IUser } from './user';
 
 export interface IForumJoinRequest {
     id: string;
@@ -9,19 +9,19 @@ export interface IForumJoinRequest {
     forum: IForum;
 }
 
-const schema = new mongoose.Schema<IForumJoinRequest>({
+const schema: mongoose.Schema = new mongoose.Schema<IForumJoinRequest>({
     isAccepted: {
         type: Boolean,
         required: false
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: User,
+        ref: 'User',
         required: false
     },
     forum: {
         type: Schema.Types.ObjectId,
-        ref: Forum,
+        ref: 'Forum',
         required: false
     }
 });

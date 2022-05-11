@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import { Forum, IForum } from './forum';
-import { ForumUser, IForumUser } from './forumUser';
+import { IForum } from './forum';
+import { IForumUser } from './forumUser';
 
 export interface IForumMessage {
     content: string;
@@ -9,19 +9,19 @@ export interface IForumMessage {
     sendedAt: Date;
 }
 
-const schema = new mongoose.Schema<IForumMessage>({
+const schema: mongoose.Schema = new mongoose.Schema<IForumMessage>({
     content: {
         type: String,
         required: true
     },
     forum: {
         type: Schema.Types.ObjectId,
-        ref: Forum,
+        ref: 'Forum',
         required: true
     },
     forumUser: {
         type: Schema.Types.ObjectId,
-        ref: ForumUser,
+        ref: 'ForumUser',
         required: true
     },
     sendedAt: {

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import { Forum, IForum } from './forum';
-import { IUser, User } from './user';
+import { IForum } from './forum';
+import { IUser } from './user';
 
 export enum Role {
     PARTICIPANT = 'PARTICIPANT',
@@ -13,7 +13,7 @@ export interface IForumUser {
     forum: IForum;
 }
 
-const schema = new mongoose.Schema<IForumUser>({
+const schema: mongoose.Schema = new mongoose.Schema<IForumUser>({
     role: {
         type: String,
         enum: Role,
@@ -21,12 +21,12 @@ const schema = new mongoose.Schema<IForumUser>({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: User,
+        ref: 'User',
         required: true
     },
     forum: {
         type: Schema.Types.ObjectId,
-        ref: Forum,
+        ref: 'Forum',
         required: true
     }
 });

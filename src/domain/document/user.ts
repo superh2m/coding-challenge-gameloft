@@ -8,7 +8,7 @@ export interface IUser {
     picture?: string;
 }
 
-const schema = new mongoose.Schema<IUser>({
+const schema: mongoose.Schema = new mongoose.Schema<IUser>({
     firstName: {
         type: String,
         required: true
