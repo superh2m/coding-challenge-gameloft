@@ -105,6 +105,26 @@ describe('GraphQL', () => {
             expect(result.data.forum).to.be.null;
         });
 
+        it('Query myForums', async () => {
+            const newForum: IForum = await createRandomForum();
+
+            const result: GraphQLResponse = await testApp.graphqlServer.executeOperation({
+                query: gql `query MyForumsQuery {
+                    myForums {
+                        id
+                        name
+                        isPrivate
+                    }
+                }`
+            });
+
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            const length: number = result.data.myForums.length;
+    
+            expect(length).at.least(1);
+            expect(result.data.myForums[length - 1].name).eq(newForum.name);
+        });
+
         it('Mutation createForum(name: String!, isPrivate: Boolean!)', async () => {
             const name: string = 'Random Forum #' + (new mongoose.Types.ObjectId()).toString();
             const isPrivate: boolean = Math.random() < 0.5;
