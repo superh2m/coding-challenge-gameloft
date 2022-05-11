@@ -10,24 +10,24 @@ export interface IForumMessage {
 }
 
 const schema: mongoose.Schema = new mongoose.Schema<IForumMessage>({
-    content: {
-        type: String,
-        required: true
-    },
-    forum: {
-        type: Schema.Types.ObjectId,
-        ref: 'Forum',
-        required: true
-    },
-    forumUser: {
-        type: Schema.Types.ObjectId,
-        ref: 'ForumUser',
-        required: true
-    },
-    sendedAt: {
-        type: Date,
-        required: true
-    }
+  content: {
+    type: String,
+    required: true
+  },
+  forum: {
+    type: Schema.Types.ObjectId,
+    ref: 'Forum',
+    required: true
+  },
+  forumUser: {
+    type: Schema.Types.ObjectId,
+    ref: 'ForumUser',
+    required: true
+  },
+  sendedAt: {
+    type: Date,
+    required: true
+  }
 });
 
 export const ForumMessage = mongoose.model<IForumMessage>('ForumMessage', schema);

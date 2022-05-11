@@ -10,20 +10,20 @@ export interface IForumJoinRequest {
 }
 
 const schema: mongoose.Schema = new mongoose.Schema<IForumJoinRequest>({
-    isAccepted: {
-        type: Boolean,
-        required: false
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: false
-    },
-    forum: {
-        type: Schema.Types.ObjectId,
-        ref: 'Forum',
-        required: false
-    }
+  isAccepted: {
+    type: Boolean,
+    required: false
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: false
+  },
+  forum: {
+    type: Schema.Types.ObjectId,
+    ref: 'Forum',
+    required: false
+  }
 });
 
 export const ForumJoinRequest = mongoose.model<IForumJoinRequest>('ForumJoinRequest', schema);

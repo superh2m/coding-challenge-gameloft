@@ -9,18 +9,18 @@ export interface IForum {
 }
 
 const schema: mongoose.Schema = new mongoose.Schema<IForum>({
-    name: {
-        type: String,
-        required: true
-    },
-    isPrivate: {
-        type: Boolean,
-        required: true
-    },
-    forumUsers: [{
-        type: Schema.Types.ObjectId,
-        ref: 'ForumUser'
-    }]
+  name: {
+    type: String,
+    required: true
+  },
+  isPrivate: {
+    type: Boolean,
+    required: true
+  },
+  forumUsers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'ForumUser'
+  }]
 });
 
 export const Forum = mongoose.model<IForum>('Forum', schema);

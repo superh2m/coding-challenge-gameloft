@@ -24,13 +24,13 @@ const queries = {
         populate: { path:  'user' }
       })
     ).filter(forum => {
-        for(let i = 0; i < forum.forumUsers.length; i++) {
-          if (forum.forumUsers[i].user.id === currentUser.id) {
-            return true;
-          }
+      for(let i = 0; i < forum.forumUsers.length; i++) {
+        if (forum.forumUsers[i].user.id === currentUser.id) {
+          return true;
         }
+      }
 
-        return false;
+      return false;
     });
   }
 };
