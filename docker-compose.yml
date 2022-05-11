@@ -1,0 +1,17 @@
+version: "3.5"
+
+services:
+    db:
+        image: mongo:5.0.8
+        ports:
+          - "27017:27017"
+
+    web:
+        build: ./docker/web
+        ports:
+            - "4000:4000"
+        working_dir: /var/www/gameloft
+        volumes:
+            - .:/var/www/gameloft
+        depends_on:
+            - db
