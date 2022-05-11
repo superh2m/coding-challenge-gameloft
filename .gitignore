@@ -4,8 +4,9 @@
 # dependencies
 /node_modules
 
-# IDE config
+# IDE configs
 .idea
+.vscode
 
 # logs
 npm-debug.log
