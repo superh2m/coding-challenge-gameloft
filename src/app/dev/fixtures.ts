@@ -9,11 +9,17 @@ import { Authenticator } from './authenticator';
 interface IData {
     reference: string;
     input: Record<string, string|boolean|Date>;
+    toCollection?: IToCollection;
 }
 
 interface IFixture {
     type: typeof Model;
     data: IData[];
+}
+
+interface IToCollection {
+    reference: string;
+    path: string;
 }
 
 interface IReference {
@@ -157,6 +163,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.ADMIN,
                     user: '@user-Céline',
                     forum: '@forum-songpop-2'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-2',
+                    path: 'forumUsers'
                 }
             },
             {
@@ -165,6 +175,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.PARTICIPANT,
                     user: '@user-Alexandre',
                     forum: '@forum-songpop-2'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-2',
+                    path: 'forumUsers'
                 }
             },
             {
@@ -173,6 +187,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.PARTICIPANT,
                     user: '@user-Gustavo',
                     forum: '@forum-songpop-2'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-2',
+                    path: 'forumUsers'
                 }
             },
             {
@@ -181,6 +199,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.PARTICIPANT,
                     user: '@user-Mauricio',
                     forum: '@forum-songpop-2'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-2',
+                    path: 'forumUsers'
                 }
             },
             {
@@ -189,6 +211,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.ADMIN,
                     user: '@user-Olivier',
                     forum: '@forum-songpop-3'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-3',
+                    path: 'forumUsers'
                 }
             },
             {
@@ -197,6 +223,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.PARTICIPANT,
                     user: '@user-Cole',
                     forum: '@forum-songpop-3'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-3',
+                    path: 'forumUsers'
                 }
             },
             {
@@ -205,6 +235,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.PARTICIPANT,
                     user: '@user-Johanna',
                     forum: '@forum-songpop-3'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-3',
+                    path: 'forumUsers'
                 }
             },
             {
@@ -213,6 +247,10 @@ const fixtures: Record<string, IFixture> = {
                     role: Role.PARTICIPANT,
                     user: '@user-Jocelyn',
                     forum: '@forum-songpop-3'
+                },
+                toCollection: {
+                    reference: '@forum-songpop-3',
+                    path: 'forumUsers'
                 }
             }
         ]
@@ -320,6 +358,10 @@ const replaceReference = ((input: Record<string, string|boolean|Date|AnyObject>)
     return input;
 });
 
+const findReference = ((searchReference: string): IReference => {
+    return references.find(reference => reference.reference === searchReference);
+});
+
 const loadFixtures = (async () => {
     const dbConnection: Connection = await mongooseClient();
 
@@ -330,6 +372,7 @@ const loadFixtures = (async () => {
 
         for (let i = 0; i < documentFixtures.data.length; i++) {
             const input = replaceReference(documentFixtures.data[i].input);
+            const toCollectionConfig: IToCollection = documentFixtures.data[i].toCollection;
             // eslint-disable-next-line
             const newDocument: AnyObject = await new documentFixtures.type(input);
             // eslint-disable-next-line
@@ -339,6 +382,14 @@ const loadFixtures = (async () => {
                 reference: documentFixtures.data[i].reference,
                 document: newDocument
             });
+
+            if (typeof toCollectionConfig !== 'undefined') {
+                const collectionReference: IReference = findReference(toCollectionConfig.reference);
+                // eslint-disable-next-line
+                collectionReference.document[toCollectionConfig.path].push(newDocument);
+                // eslint-disable-next-line
+                await collectionReference.document.save();
+            }
         }
     }
 
