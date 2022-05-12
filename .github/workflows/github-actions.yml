@@ -9,9 +9,6 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: sudo mkdir -p /.npm
-      - run: sudo chown -R 1001:121 "/.npm"
       - name: Install project
         run: |
           cd ${{ github.workspace }} && make install
-      - run: echo "🍏 This job's status is ${{ job.status }}."

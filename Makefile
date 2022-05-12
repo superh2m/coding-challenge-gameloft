@@ -12,7 +12,7 @@ install: ## Installs the project
 # ==============================================================================
 # Project updates tasks ========================================================
 npm:
-	docker-compose run --rm --user $$(id -u):$$(id -g) --entrypoint sh web -c "npm $(CMD)"
+	docker-compose run --rm --entrypoint sh web -c "npm $(CMD)"
 
 build:
 	$(MAKE) npm CMD="run build"
@@ -33,7 +33,7 @@ test:
 start_dev:
 	sudo service docker start || true
 	docker-compose up -d db
-	docker-compose run --rm --user $$(id -u):$$(id -g) --service-ports --entrypoint sh web -c 'npm run dev'
+	docker-compose run --rm --service-ports --entrypoint sh web -c 'npm run dev'
 
 run_in_background:
 	$(MAKE) stop || true
