@@ -1,4 +1,5 @@
-<img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Gameloft-logo-and-wordmark.png" alt="Gameloft logo" width="500"/><br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Gameloft-logo-and-wordmark.png" alt="Gameloft logo" width="500"/><br><br>
+[![Workflow](https://github.com/superh2m/coding-challenge-gameloft/actions/workflows/github-actions.yml/badge.svg)](https://github.com/superh2m/coding-challenge-gameloft/actions)
 # Gameloft Coding Challenge
 
 I was really happy to do this technical test, which by its openness allows a great freedom of technical choices. I hope that my choices and my work will satisfy you. Thank you for your time :)
