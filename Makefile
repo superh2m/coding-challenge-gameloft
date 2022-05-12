@@ -6,13 +6,20 @@ install: ## Installs the project
 	docker-compose build
 	$(MAKE) npm CMD='install'
 	$(MAKE) npm CMD='run install:pre-commit'
-	$(MAKE) load_data
+	$(MAKE) load_fixtures
 	$(MAKE) start_dev
+
+install_ci: ## Installs the project on CI
+	sudo service docker start || true
+	docker-compose build
+	docker-compose run --rm --entrypoint sh web -c "npm install"
+	docker-compose run --rm --entrypoint sh web -c "npm run install:pre-commit"
+	docker-compose run --rm --entrypoint sh web -c "npm run load_fixtures"
 
 # ==============================================================================
 # Project updates tasks ========================================================
 npm:
-	docker-compose run --rm --entrypoint sh web -c "npm $(CMD)"
+	docker-compose run --rm --user $$(id -u):$$(id -g) --entrypoint sh web -c "npm $(CMD)"
 
 build:
 	$(MAKE) npm CMD="run build"
@@ -33,7 +40,7 @@ test:
 start_dev:
 	sudo service docker start || true
 	docker-compose up -d db
-	docker-compose run --rm --service-ports --entrypoint sh web -c 'npm run dev'
+	docker-compose run --rm --user $$(id -u):$$(id -g) --service-ports --entrypoint sh web -c 'npm run dev'
 
 run_in_background:
 	$(MAKE) stop || true
