@@ -14,7 +14,7 @@ jobs:
       - name: List files
         run: |
           ls ${{ github.workspace }}
-      - run: sudo mkdir -R /.npm
+      - run: sudo mkdir -p /.npm
       - run: sudo chown -R 1001:121 "/.npm"
       - name: Install project
         run: |
