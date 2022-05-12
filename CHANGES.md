@@ -29,7 +29,6 @@ type Query {
 
 type Mutation {
   ...
-  ~~joinForum(forumId: ID!): ForumUser~~
   createForum(name: String!, isPrivate: Boolean!): Forum
   createJoinRequest(forumId: ID!): ForumJoinRequest
   acceptJoinRequest(forumJoinRequestId: ID!): ForumJoinRequest

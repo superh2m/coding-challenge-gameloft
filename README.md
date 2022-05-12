@@ -11,6 +11,7 @@ I was really happy to do this technical test, which by its openness allows a gre
 - Install [make](https://linuxhint.com/install-make-ubuntu/) package
 - `make install` installs the application
 - `make start_dev` run the dev server
+- [Changes file](CHANGES.md)
 
 ## GraphQL
 
