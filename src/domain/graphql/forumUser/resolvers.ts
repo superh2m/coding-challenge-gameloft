@@ -5,7 +5,7 @@ const queries = {
     return await ForumUserDocument.find({ forum: args.forumId }).populate('user').populate('forum');
   },
 };
-  
+
 const mutations = {
 };
 

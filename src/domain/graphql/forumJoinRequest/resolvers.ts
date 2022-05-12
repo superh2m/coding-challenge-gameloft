@@ -37,7 +37,7 @@ const mutations = {
     });
 
     await forumJoinRequest.save();
-    
+
     return (await forumJoinRequest.populate('forum')).populate('user');
   },
 

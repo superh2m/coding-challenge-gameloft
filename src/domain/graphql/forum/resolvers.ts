@@ -11,16 +11,16 @@ const queries = {
     return await ForumDocument.find({ name: q, isPrivate: false });
   },
 
-  forum: async (_root: undefined, args: Record<string, string>): Promise<IForumDocument> => {    
+  forum: async (_root: undefined, args: Record<string, string>): Promise<IForumDocument> => {
     return await ForumDocument.findById(args.id);
   },
 
   myForums: async (): Promise<IForumDocument[]> => {
     const currentUser: IUserDocument = await Authenticator.getDefaultUser();
-    
+
     return (
       await ForumDocument.find().populate({
-        path: 'forumUsers',			
+        path: 'forumUsers',
         populate: { path:  'user' }
       })
     ).filter(forum => {
@@ -55,7 +55,7 @@ const mutations = {
     forum.forumUsers.push(forumUser);
 
     await forum.save();
-    
+
     return forum;
   }
 };

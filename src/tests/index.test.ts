@@ -34,7 +34,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { q: '' },
       });
-    
+
       expect(result.data.forums.length).eq(4);
     });
 
@@ -49,7 +49,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { q: 'SongPop 3' },
       });
-    
+
       expect(result.data.forums.length).eq(1);
       expect(result.data.forums[0]).has.keys('id', 'name', 'isPrivate');
       expect(result.data.forums[0].name).eq('SongPop 3');
@@ -66,7 +66,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { q: 'InexistingForum 1' },
       });
-    
+
       expect(result.data.forums.length).eq(0);
     });
 
@@ -83,13 +83,13 @@ describe('GraphQL', () => {
                 }`,
         variables: { id: newForum.id },
       });
-    
+
       expect(result.data.forum).to.not.be.null;
       expect(result.data.forum).has.keys('id', 'name', 'isPrivate');
       expect(result.data.forum.name).eq(newForum.name);
       expect(result.data.forum.isPrivate).eq(newForum.isPrivate);
     });
-        
+
     it('Query forum(id: ID!) without result', async () => {
       const result: GraphQLResponse = await testApp.graphqlServer.executeOperation({
         query: gql `query ForumQuery($id: ID!) {
@@ -101,7 +101,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { id: 'Inexisting Forum ID' },
       });
-    
+
       expect(result.data.forum).to.be.null;
     });
 
@@ -120,7 +120,7 @@ describe('GraphQL', () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const length: number = result.data.myForums.length;
-    
+
       expect(length).at.least(1);
       expect(result.data.myForums[length - 1].name).eq(newForum.name);
     });
@@ -139,7 +139,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { name, isPrivate },
       });
-    
+
       expect(result.data.createForum).to.not.be.null;
       expect(result.data.createForum).has.keys('id', 'name', 'isPrivate');
       expect(result.data.createForum.name).eq(name);
@@ -172,7 +172,7 @@ describe('GraphQL', () => {
       expect(result.data.user.email).eq(testUser.email);
       expect(result.data.user.picture).eq(testUser.picture);
     });
-        
+
     it('Query user(id: String!) without result', async () => {
       const result: GraphQLResponse = await testApp.graphqlServer.executeOperation({
         query: gql `query UserQuery($id: ID!) {
@@ -186,7 +186,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { id: 'Inexisting User ID' },
       });
-    
+
       expect(result.data.user).to.be.null;
     });
 
@@ -208,7 +208,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { firstName, lastName, picture },
       });
-    
+
       expect(result.data.updateProfile).to.not.be.null;
       expect(result.data.updateProfile).has.keys('id', 'firstName', 'lastName', 'email', 'picture');
       expect(result.data.updateProfile.firstName).eq(testUser.firstName);
@@ -242,7 +242,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { forumId: forum.id },
       });
-    
+
       expect(result.data.forumUsers.length).eq(4);
       expect(result.data.forumUsers[0]).has.keys('id', 'role', 'user', 'forum');
     });
@@ -269,7 +269,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { forumId: 'InexistingForum-ID' },
       });
-    
+
       expect(result.data.forumUsers).to.be.null;
     });
   });
@@ -300,7 +300,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { forumId: forumJoinRequest.forum.id },
       });
-    
+
       expect(result.data.forumJoinRequests.length).eq(1);
       expect(result.data.forumJoinRequests[0]).has.keys('id', 'user', 'isAccepted', 'forum');
       expect(result.data.forumJoinRequests[0].id).eq(forumJoinRequest.id);
@@ -332,7 +332,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { forumId: newForum.id },
       });
-    
+
       expect(result.data.forumJoinRequests.length).eq(0);
     });
 
@@ -496,7 +496,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { forumId: forum.id },
       });
-    
+
       expect(result.data.forumMessages.length).eq(5);
       expect(result.data.forumMessages[0]).has.keys('id', 'content', 'sendedAt', 'forumUser', 'forum');
       expect(result.data.forumMessages[0].forumUser.user).has.keys('id', 'firstName', 'email', 'lastName', 'picture');
@@ -531,7 +531,7 @@ describe('GraphQL', () => {
                 }`,
         variables: { forumId: forum.id },
       });
-    
+
       expect(result.data.forumMessages.length).eq(0);
     });
 

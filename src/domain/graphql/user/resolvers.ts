@@ -7,7 +7,7 @@ const queries = {
     return await UserDocument.findById(args.id).exec();
   }
 };
-  
+
 const mutations = {
   updateProfile: async (_root: undefined, args: Record<string, string>): Promise<IUserDocument> => {
     const currentUser: HydratedDocument<IUserDocument> = await Authenticator.getDefaultUser();
@@ -17,7 +17,7 @@ const mutations = {
     currentUser.picture = args.picture ?? null;
 
     await currentUser.save();
-    
+
     return currentUser;
   }
 };

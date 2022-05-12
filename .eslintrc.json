@@ -18,6 +18,8 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "quotes": [2, "single", { "avoidEscape": true }]
+        "quotes": [2, "single", { "avoidEscape": true }],
+        "indent": ["error", 2],
+        "no-trailing-spaces": "error"
     }
 }

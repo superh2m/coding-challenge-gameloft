@@ -7,7 +7,7 @@ import { ForbiddenError } from 'apollo-server-express';
 const queries = {
   forumMessages: async (_root: undefined, args: Record<string, string>): Promise<IForumMessageDocument[]> => {
     return await ForumMessageDocument.find({ forum: args.forumId }).populate('forum').populate({
-      path: 'forumUser',			
+      path: 'forumUser',
       populate: { path:  'user' }
     }).sort([['sendedAt', 'asc']]);
   }
@@ -31,7 +31,7 @@ const mutations = {
     await forumMessage.save();
 
     return await (await forumMessage.populate('forum')).populate({
-      path: 'forumUser',			
+      path: 'forumUser',
       populate: [{ path: 'user' }, { path: 'forum' }]
     });
   }
