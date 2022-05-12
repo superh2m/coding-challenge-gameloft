@@ -12,3 +12,6 @@ jobs:
       - name: Install project
         run: |
           cd ${{ github.workspace }} && make install_ci
+      - name: Run test suite
+        run: |
+          cd ${{ github.workspace }} && make test

@@ -13,8 +13,6 @@ install_ci: ## Installs the project on CI
 	sudo service docker start || true
 	docker-compose build
 	docker-compose run --rm --entrypoint sh web -c "npm install"
-	docker-compose run --rm --entrypoint sh web -c "npm run install:pre-commit"
-	docker-compose run --rm --entrypoint sh web -c "npm run load_fixtures"
 
 # ==============================================================================
 # Project updates tasks ========================================================
