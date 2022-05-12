@@ -6,8 +6,13 @@ install: ## Installs the project
 	docker-compose build
 	$(MAKE) npm CMD='install'
 	$(MAKE) npm CMD='run install:pre-commit'
-	$(MAKE) load_data
+	$(MAKE) load_fixtures
 	$(MAKE) start_dev
+
+install_ci: ## Installs the project on CI
+	sudo service docker start || true
+	docker-compose build
+	docker-compose run --rm --entrypoint sh web -c "npm install"
 
 # ==============================================================================
 # Project updates tasks ========================================================
