@@ -131,7 +131,7 @@ make start_dev
  ┃ ┣ 📂domain
  ┃ ┃ ┣ 📂document                 => mongodb document schemas
  ┃ ┃ ┗ 📂graphql                  => graphql schemas
- ┃ ┃ ┃ ┣ 📂forum                  => each schema element is separated in a separate file: types, queries, mutations and resolvers
+ ┃ ┃ ┃ ┣ 📂forum                  => each schema element is separated in a different file: types, queries, mutations and resolvers
  ┃ ┃ ┃ ┃ ┣ 📜index.ts
  ┃ ┃ ┃ ┃ ┣ 📜mutations.ts
  ┃ ┃ ┃ ┃ ┣ 📜queries.ts
@@ -157,4 +157,4 @@ All files and folders have not been listed here for readability.
 ### Approach and architecture
 I choose to go with the [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) approach, and add a much better decoupling compared to a classic NodeJS app.
 A key concept of this architecture is therefore to put all the business logic in a single place called the domain (hexagon), which depends only on itself; this is the only way to ensure that the business logic is decoupled from technical layers. So all our graphQL resolvers and schemas are placed in the `src/domain/` directory.
-I also chose to use a NoSQL database to store data, with MongoDB, and to not use the server memory to present a more realistic application.
+I also chose to use a NoSQL database to store the data, with MongoDB, to present a more realistic application.
