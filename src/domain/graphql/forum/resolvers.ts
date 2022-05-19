@@ -8,11 +8,17 @@ const queries = {
   forums: async (_root: undefined, args: Record<string, string>): Promise<IForumDocument[]> => {
     const q = new RegExp(`${args.q ?? ''}`);
 
-    return await ForumDocument.find({ name: q, isPrivate: false });
+    return await ForumDocument.find({ name: q, isPrivate: false }).populate({
+      path: 'forumUsers',
+      populate: { path:  'user' }
+    });
   },
 
   forum: async (_root: undefined, args: Record<string, string>): Promise<IForumDocument> => {
-    return await ForumDocument.findById(args.id);
+    return await ForumDocument.findById(args.id).populate({
+      path: 'forumUsers',
+      populate: { path:  'user' }
+    });
   },
 
   myForums: async (): Promise<IForumDocument[]> => {
