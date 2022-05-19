@@ -137,15 +137,10 @@ make start_dev
  ┃ ┃ ┃ ┃ ┣ 📜queries.ts
  ┃ ┃ ┃ ┃ ┣ 📜resolvers.ts
  ┃ ┃ ┃ ┃ ┗ 📜types.ts
- ┃ ┃ ┃ ┣ 📂forumJoinRequest
- ┃ ┃ ┃ ┣ 📂forumMessage
- ┃ ┃ ┃ ┣ 📂forumUser
- ┃ ┃ ┃ ┣ 📂user
  ┃ ┣ 📂infra
  ┃ ┃ ┗ 📂mongodb
  ┃ ┃ ┃ ┗ 📜mongooseClient.ts      => small abstraction for the database connection
  ┃ ┣ 📂tests                      => test suite
- ┃ ┗ 📜index.ts
  ┣ 📜.eslintrc.json               => eslint config file
  ┣ 📜.nvmrc                       => nvm config file
  ┣ 📜Makefile                     => commands orchestrator
